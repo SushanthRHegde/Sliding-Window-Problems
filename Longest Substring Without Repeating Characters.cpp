@@ -1,3 +1,31 @@
+// Approach 1 : 
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int left = 0 , right = 0;
+        int n = s.size();
+        int len = 0;
+        unordered_map<int,int> mp;
+        while( right < n){
+            mp[s[right]]++;
+            // coz no duplication is allowed --> mp [nums[right]] == 1 only
+            while(mp[s[right]] > 1){
+                mp[s[left]]--;
+                if(mp[s[left]] == 0) mp.erase(s[left]);
+                left++;
+            }
+            len = max(len, right - left + 1);
+            right++;
+        }
+        return len;
+    }
+};
+
+
+
+// Approach 2 : 
+
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
